@@ -12,11 +12,11 @@ class TipoBolo extends Model
     protected $fillable = ['nome', 'valor', 'peso'];
 
     public function bolos(){
-        return $this->hasMany(Bolo::class);
+        return $this->hasMany(Bolo::class, 'tipo_bolos_id');
     }
 
     public function lista_interesses(){
-        return $this->hasMany(ListaInteresse::class);
+        return $this->hasMany(ListaInteresse::class, 'tipo_bolos_id');
     }
 
     protected $table = 'tipo_bolos';

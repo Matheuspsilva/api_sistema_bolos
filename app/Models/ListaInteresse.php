@@ -12,10 +12,10 @@ class ListaInteresse extends Model
     protected $fillable = ['tipo_bolos_id', 'clientes_id'];
 
     public function cliente(){
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class, 'clientes_id');
     }
 
     public function tipo_bolo(){
-        return $this->hasOne(TipoBolo::class);
+        return $this->belongsTo(TipoBolo::class, 'tipo_bolos_id');
     }
 }

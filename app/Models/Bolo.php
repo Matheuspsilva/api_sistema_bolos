@@ -12,7 +12,7 @@ class Bolo extends Model
     protected $fillable = ['tipo_bolos_id'];
 
     public function tipo_bolo(){
-        return $this->belongsTo(TipoBolo::class);
+        return $this->belongsTo(TipoBolo::class, 'tipo_bolos_id');
     }
 
     protected $table = 'bolos';

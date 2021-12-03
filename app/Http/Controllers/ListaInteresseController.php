@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Api\ApiMessages;
 use App\Http\Requests\ListaInteresseRequest;
+use App\Mail\ListaInteresseMail;
 use App\Models\ListaInteresse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ListaInteresseController extends Controller
 {
@@ -39,6 +41,11 @@ class ListaInteresseController extends Controller
 
         try {
             $lista_interesse = $this->lista_interesse->create($data);
+
+            $user = $lista_interesse->cliente;
+
+            Mail::to($user)
+                ->send(new ListaInteresseMail($lista_interesse));
 
             return response()->json(['data' => [
                 'msg' => 'A lista de interesse foi cadastrado com sucesso'
