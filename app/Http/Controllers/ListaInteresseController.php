@@ -42,10 +42,7 @@ class ListaInteresseController extends Controller
         try {
             $lista_interesse = $this->lista_interesse->create($data);
 
-            $user = $lista_interesse->cliente;
-
-            Mail::to($user)
-                ->send(new ListaInteresseMail($lista_interesse));
+            \App\Jobs\ListaInteresseMail::dispatch($lista_interesse);
 
             return response()->json(['data' => [
                 'msg' => 'A lista de interesse foi cadastrado com sucesso'

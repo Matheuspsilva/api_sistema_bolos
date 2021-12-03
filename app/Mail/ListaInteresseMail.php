@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\ListaInteresse;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -18,7 +19,7 @@ class ListaInteresseMail extends Mailable
      *
      * @return void
      */
-    public function __construct($lista_interesse)
+    public function __construct(ListaInteresse $lista_interesse)
     {
         $this->lista_interesse = $lista_interesse;
     }
