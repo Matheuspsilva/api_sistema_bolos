@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Api\ApiMessages;
-use App\Http\Requests\ClienteRequest;
-use App\Models\Cliente;
+use App\Http\Requests\BoloRequest;
+use App\Models\Bolo;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class BoloController extends Controller
 {
 
-    private $cliente;
+    private $bolo;
 
-    public function __construct(Cliente $cliente)
+    public function __construct(Bolo $bolo)
     {
-        $this->cliente = $cliente;
+        $this->bolo = $bolo;
     }
 
     /**
@@ -24,25 +24,26 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = $this->cliente->paginate('10');
-        return response()->json($clientes, 200);
+        $bolos = $this->bolo->paginate('10');
+        return response()->json($bolos, 200);
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClienteRequest $request)
+    public function store(BoloRequest $request)
     {
         $data = $request->all();
 
         try {
-            $cliente = $this->cliente->create($data);
+            $bolo = $this->bolo->create($data);
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi cadastrado com sucesso '
+                'msg' => 'O bolo foi cadastrado com sucesso '
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -60,10 +61,10 @@ class ClienteController extends Controller
     public function show($id)
     {
         try {
-            $cliente = $this->cliente->findOrFail($id);
+            $bolo = $this->bolo->findOrFail($id);
 
             return response()->json(['data' => [
-                'data' => $cliente
+                'data' => $bolo
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -75,7 +76,7 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -85,11 +86,11 @@ class ClienteController extends Controller
 
         try {
 
-            $cliente = $this->cliente->findOrFail($id);
-            $cliente->update($data);
+            $bolo = $this->bolo->findOrFail($id);
+            $bolo->update($data);
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi atualizado com sucesso '
+                'msg' => 'O bolo foi atualizado com sucesso '
                 ]
             ], 200);
 
@@ -109,11 +110,11 @@ class ClienteController extends Controller
     {
         try {
 
-            $cliente = $this->cliente->findOrFail($id);
-            $cliente->delete();
+            $bolo = $this->bolo->findOrFail($id);
+            $bolo->delete();
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi removido com sucesso ']
+                'msg' => 'O bolo foi removido com sucesso ']
             ]
             , 200);
 

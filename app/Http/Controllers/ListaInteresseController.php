@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Api\ApiMessages;
-use App\Http\Requests\ClienteRequest;
-use App\Models\Cliente;
+use App\Http\Requests\ListaInteresseRequest;
+use App\Models\ListaInteresse;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class ListaInteresseController extends Controller
 {
+    private $lista_interesse;
 
-    private $cliente;
-
-    public function __construct(Cliente $cliente)
+    public function __construct(ListaInteresse $lista_interesse)
     {
-        $this->cliente = $cliente;
+        $this->lista_interesse = $lista_interesse;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,25 +22,26 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = $this->cliente->paginate('10');
-        return response()->json($clientes, 200);
+        $lista_interesses = $this->lista_interesse->paginate('10');
+        return response()->json($lista_interesses, 200);
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClienteRequest $request)
+    public function store(ListaInteresseRequest $request)
     {
         $data = $request->all();
 
         try {
-            $cliente = $this->cliente->create($data);
+            $lista_interesse = $this->lista_interesse->create($data);
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi cadastrado com sucesso '
+                'msg' => 'A lista de interesse foi cadastrado com sucesso'
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -60,10 +59,10 @@ class ClienteController extends Controller
     public function show($id)
     {
         try {
-            $cliente = $this->cliente->findOrFail($id);
+            $lista_interesse = $this->lista_interesse->findOrFail($id);
 
             return response()->json(['data' => [
-                'data' => $cliente
+                'data' => $lista_interesse
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -75,7 +74,7 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -85,11 +84,11 @@ class ClienteController extends Controller
 
         try {
 
-            $cliente = $this->cliente->findOrFail($id);
-            $cliente->update($data);
+            $lista_interesse = $this->lista_interesse->findOrFail($id);
+            $lista_interesse->update($data);
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi atualizado com sucesso '
+                'msg' => 'O tipo de bolo foi atualizado com sucesso '
                 ]
             ], 200);
 
@@ -109,11 +108,11 @@ class ClienteController extends Controller
     {
         try {
 
-            $cliente = $this->cliente->findOrFail($id);
-            $cliente->delete();
+            $lista_interesse = $this->lista_interesse->findOrFail($id);
+            $lista_interesse->delete();
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi removido com sucesso ']
+                'msg' => 'O tipo de bolo foi removido com sucesso ']
             ]
             , 200);
 

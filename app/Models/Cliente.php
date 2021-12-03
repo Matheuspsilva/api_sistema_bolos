@@ -9,6 +9,8 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome', 'email'];
+
     public function lista_interesses(){
         return $this->hasMany(ListaInteresse::class);
     }

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Api\ApiMessages;
-use App\Http\Requests\ClienteRequest;
-use App\Models\Cliente;
+use App\Http\Requests\TipoBoloRequest;
+use App\Models\TipoBolo;
 use Illuminate\Http\Request;
+use App\Api\ApiMessages;
 
-class ClienteController extends Controller
+class TipoBoloController extends Controller
 {
 
-    private $cliente;
+    private $tipo_bolo;
 
-    public function __construct(Cliente $cliente)
+    public function __construct(TipoBolo $tipo_bolo)
     {
-        $this->cliente = $cliente;
+        $this->tipo_bolo = $tipo_bolo;
     }
 
     /**
@@ -24,25 +24,25 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = $this->cliente->paginate('10');
-        return response()->json($clientes, 200);
+        $tipo_bolos = $this->tipo_bolo->paginate('10');
+        return response()->json($tipo_bolos, 200);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  \Illuminate\Http\TipoBoloRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClienteRequest $request)
+    public function store(TipoBoloRequest $request)
     {
         $data = $request->all();
 
         try {
-            $cliente = $this->cliente->create($data);
+            $tipo_bolo = $this->tipo_bolo->create($data);
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi cadastrado com sucesso '
+                'msg' => 'O tipo de bolo foi cadastrado com sucesso '
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -60,10 +60,10 @@ class ClienteController extends Controller
     public function show($id)
     {
         try {
-            $cliente = $this->cliente->findOrFail($id);
+            $tipo_bolo = $this->tipo_bolo->findOrFail($id);
 
             return response()->json(['data' => [
-                'data' => $cliente
+                'data' => $tipo_bolo
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -75,21 +75,22 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  \Illuminate\Http\TipoBoloRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+
         $data = $request->all();
 
         try {
 
-            $cliente = $this->cliente->findOrFail($id);
-            $cliente->update($data);
+            $tipo_bolo = $this->tipo_bolo->findOrFail($id);
+            $tipo_bolo->update($data);
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi atualizado com sucesso '
+                'msg' => 'O tipo de bolo foi atualizado com sucesso '
                 ]
             ], 200);
 
@@ -97,6 +98,7 @@ class ClienteController extends Controller
             $message = new ApiMessages($e->getMessage());
 		    return response()->json($message->getMessage(), 401);
         }
+
     }
 
     /**
@@ -109,11 +111,11 @@ class ClienteController extends Controller
     {
         try {
 
-            $cliente = $this->cliente->findOrFail($id);
-            $cliente->delete();
+            $tipo_bolo = $this->tipo_bolo->findOrFail($id);
+            $tipo_bolo->delete();
 
             return response()->json(['data' => [
-                'msg' => 'O cliente foi removido com sucesso ']
+                'msg' => 'O tipo de bolo foi removido com sucesso ']
             ]
             , 200);
 

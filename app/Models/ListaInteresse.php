@@ -9,6 +9,8 @@ class ListaInteresse extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['tipo_bolos_id', 'clientes_id'];
+
     public function cliente(){
         return $this->hasOne(Cliente::class);
     }

@@ -9,6 +9,8 @@ class TipoBolo extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome', 'valor', 'peso'];
+
     public function bolos(){
         return $this->hasMany(Bolo::class);
     }
