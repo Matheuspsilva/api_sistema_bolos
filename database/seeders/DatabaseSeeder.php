@@ -16,5 +16,17 @@ class DatabaseSeeder extends Seeder
         //Usuário de teste com credenciais estáticas
         \App\Models\User::factory()->test()->create();
         \App\Models\User::factory(10)->create();
+        \App\Models\TipoBolo::factory(10)->create();
+        \App\Models\Cliente::factory(10)->create();
+        \App\Models\Bolo::factory(10)->create();
+        \App\Models\ListaInteresse::factory(10)->create();
+
+
+
+
+
+
+
+
     }
 }
