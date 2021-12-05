@@ -36,4 +36,14 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function test()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'teste',
+                'email' => 'teste@email.com',
+            ];
+        });
+    }
 }

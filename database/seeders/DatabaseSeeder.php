@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        //Usuário de teste com credenciais estáticas
+        \App\Models\User::factory()->test()->create();
+        \App\Models\User::factory(10)->create();
     }
 }
